@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mayank</title>
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <py-env>
+        - requests
+    </py-env>
+
+</head>
+<body>
+
+import os
+import time
+
+
+def animate_SpaceInvader(text):
+
+numberOfWords=0
+code=text.split("\n")
+
+while numberOfWords <= len(code)-1:
+print(code[numberOfWords])
+numberOfWords += 1
+time.sleep(0.1)
+
+text_to_show="""
+import requests
+
+def get_instance_metadata_imdsv1():
+instance_identity_url = "http://169.254.169.254/latest/meta-data/"
+session = requests.Session()
+r = requests.get(instance_identity_url)
+response_json = r.json()
+print(response_json)
+
+def get_instance_metadata_imdsv2():
+http_headers = { 'X-aws-ec2-metadata-token-ttl-seconds': 600, "content-type": "application/json"}
+instance_details = None
+connection = httplib.HTTPConnection('http://169.254.169.254')
+connection.request('PUT', '/latest/api/token', None, http_headers)
+response = connection.getresponse()
+auth_token = response.read()
+http_headers = {'X-aws-ec2-metadata-token': auth_token, "content-type": "application/json"}
+connection.request('GET', '/2016-06-30/dynamic/instance-identity/document/', None, http_headers)
+response = connection.getresponse()
+instance_details = response.read()
+get_instance_metadata_imdsv1
+get_instance_metadata_imdsv2
+"""
+
+animate_SpaceInvader(text_to_show)
+
+<p>
+    <py-script>
+import requests
+
+def get_instance_metadata_imdsv1():
+  instance_identity_url = "http://169.254.169.254/latest/meta-data/"
+  session = requests.Session()
+  r = requests.get(instance_identity_url)
+  response_json = r.json()
+  print(response_json)
+
+def get_instance_metadata_imdsv2():
+  http_headers = { 'X-aws-ec2-metadata-token-ttl-seconds': 600, "content-type": "application/json"}
+  instance_details = None
+  connection = httplib.HTTPConnection('http://169.254.169.254')
+  connection.request('PUT', '/latest/api/token', None, http_headers)
+  response = connection.getresponse()
+  auth_token = response.read()
+  http_headers = {'X-aws-ec2-metadata-token': auth_token, "content-type": "application/json"}
+  connection.request('GET', '/2016-06-30/dynamic/instance-identity/document/', None, http_headers)
+  response = connection.getresponse()
+  instance_details = response.read()
+
+get_instance_metadata_imdsv1
+get_instance_metadata_imdsv2
+    </py-script>
+</p>
+</body>
+</html>
